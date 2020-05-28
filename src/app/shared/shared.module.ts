@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FaIconModule } from './fa-icon/fa-icon.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormBuilderComponent } from './components/form-builder/form-builder.component';
+import { ListComponent } from './components/list/list.component';
 
 @NgModule({
   imports: [
@@ -10,9 +11,10 @@ import { FormBuilderComponent } from './components/form-builder/form-builder.com
     FaIconModule,
     ReactiveFormsModule
   ],
-  declarations: [FormBuilderComponent],
+  declarations: [FormBuilderComponent, ListComponent],
   exports: [
     FormBuilderComponent,
+    ListComponent,
     FaIconModule
   ]
 })

@@ -1,28 +1,21 @@
-<form [formGroup]="formGroup" (ngSubmit)="onSubmitFunction()">
-  <table>
-    <ng-container *ngFor="let section of formStructure.sections">
-      <tr>
-        <th colspan="2">
-          <span>{{section.title}}</span>
-        </th>
-      </tr>
-      <ng-container *ngFor="let item of section.items">
-        <ng-container *ngFor="let input of item.input">
-          <tr>
-            <td>
-              <label>{{input.label}}</label>
-            </td>
-            <td class="text-left">
-              <input [formControlName]="input.control" [type]="input.type" />
-            </td>
-          </tr>
-        </ng-container>
+<table [formGroup]="formGroup">
+  <ng-container *ngFor="let section of formStructure.sections">
+    <tr>
+      <th colspan="2">
+        <span>{{section.title}}</span>
+      </th>
+    </tr>
+    <ng-container *ngFor="let item of section.items">
+      <ng-container *ngFor="let input of item.input">
+        <tr>
+          <td>
+            <label>{{input.label}}</label>
+          </td>
+          <td class="text-left">
+            <input [formControlName]="input.control" [type]="input.type" />
+          </td>
+        </tr>
       </ng-container>
     </ng-container>
-    <!-- <tr>
-      <td colspan="2" class="text-right">
-        <input [disabled]="formGroup.invalid" type="submit" [value]="submitLabel || 'Submit'">
-      </td>
-    </tr>       -->
-  </table>
-</form>
+  </ng-container>
+</table>

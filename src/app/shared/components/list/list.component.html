@@ -1,7 +1,7 @@
 <div style="margin:0.5rem">
   <ul class="list">
-    <li *ngFor="let item of items">
-      <p>{{item[label]}}</p>
+    <li *ngFor="let item of items" [class.active]="isActive(item)">
+      <p>{{getLabel(item)}}</p>
     </li>
   </ul>
 </div>

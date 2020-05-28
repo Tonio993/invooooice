@@ -212,6 +212,8 @@ ul.list {
 
     &.active {
       background: map-get($colors, first);
+      color: map-get($colors, first-font);
+      font-weight: bold;
     }
 
   }

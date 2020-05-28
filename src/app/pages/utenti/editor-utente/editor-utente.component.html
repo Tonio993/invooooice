@@ -1,0 +1,9 @@
+<div class="container mx-auto">
+  <app-form-builder [formGroup]="formModel.formGroup" 
+                    [formStructure]="formStructure"
+                    submitLabel="Salva"
+                    (onSubmit)="onSubmit($event)"></app-form-builder>
+  <div style="text-align:right">
+    <input type="submit" [disabled]="formModel.formGroup.invalid" value="Salva" />
+  </div>
+</div>

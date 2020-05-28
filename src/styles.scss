@@ -1,0 +1,218 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Bhai+2:wght@400;700&display=swap');
+
+$colors: (
+  first: #4a88d8,
+  first-font: #ffffff,
+  second: #e0e0e0,
+  second-font: #000000,
+  minor-gray: #777777,
+  input-border: #e0e0e0
+);
+
+* {
+  font-family: 'Baloo Bhai 2', cursive;
+  box-sizing: border-box;
+  outline: none;
+}
+
+nav.navbar {
+  margin: 0 0;
+  background: map-get($colors, first);
+  // border-top: 1px solid black;
+  // border-bottom: 1px solid black;
+
+  // Primo elemento
+  ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+
+    li {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      background: map-get($colors, first);
+      padding: 1rem 0.5rem;
+      font-weight: bold;
+      white-space: nowrap;
+      cursor: pointer;
+        
+      a {
+        color: map-get($colors, first-font);
+        text-decoration: none;
+      }
+
+      &:hover {
+        background: lighten(map-get($colors, first), 10);
+      }
+    }
+
+    > li {
+
+      // Secondo elemento
+      > ul {
+        flex-direction: column;
+        border: 1px solid black;
+        position: absolute;
+        display: none;
+        left: 0;
+        top: 100%;
+
+        > li {
+          background: map-get($colors, second);
+          padding: 0.5rem 0.5rem;
+          font-weight: normal;
+
+          a {
+            color: map-get($colors, second-font);
+          }
+
+          fa-icon {
+            color: map-get($colors, second-font);
+            margin-left: 0.5rem;
+          }
+
+          &:hover {
+            background: darken(map-get($colors, second), 10);
+          }
+
+          // Terzo+ elemento
+          > ul {
+            left: 100%;
+            top: -1px;
+          }
+        }
+      }
+
+      &:hover > ul, ul:hover {
+        display: flex;
+      }
+    }
+  }
+}
+
+ol.breadcrumb {
+  display: flex;
+  background: none;
+  font-size: 0.8em;
+  margin: 0;
+  
+  li {
+    list-style: none;
+    margin: 5px;
+    
+    &:last-child {
+      margin-right: 1.5rem;
+    }
+  }
+
+  fa-icon {
+    margin-left: 0.5rem;
+  }
+
+  span {
+    color: map-get($colors, minor-gray);
+
+    &:hover.has-route {
+      color: darken(map-get($colors, minor-gray), 20);
+      text-decoration: none;
+      cursor: pointer;
+    }
+  }
+}
+
+.panel {
+  background: map-get($colors, second);
+  padding: 1rem;
+}
+
+input {
+  padding: 0.2rem 0.5rem;
+
+  &::placeholder {
+    color: map-get($colors, minor-gray);
+  }
+}
+
+form {
+  padding: 1rem;
+  width: 100%;
+
+  table {
+    margin: auto;
+
+    td {
+      padding: 0.25rem 0.25rem;
+      text-align: right;
+
+    }
+  }
+}
+
+@mixin button($background, $font) {
+  border-radius: 0.25rem;
+  background: $background;
+  color: $font;
+  font-weight: bold;
+  cursor: pointer;
+  &:hover {
+    background: darken($background, 10);
+  }
+  &:active {
+    background: lighten($background, 10);
+  }
+  &[disabled] {
+    background: white;
+    box-shadow: 0 0 0 1px desaturate($background, 30%);
+    color: desaturate($background, 30%);
+    cursor: not-allowed;
+  }
+}
+
+input:not([type=button]):not([type=submit]) {
+  border: 1px solid gray;
+  border-radius: 0.25rem;
+}
+
+input[type=submit], input[type=button] {
+  &[type=submit] {
+    @include button(map-get($colors, first), map-get($colors, first-font))
+  }
+  &[type=button] {
+    @include button(map-get($colors, second), map-get($colors, second-font))
+  }
+}
+
+ul.list {
+  cursor: pointer;
+
+  li {
+    border: 1px solid gray;
+    padding: 0.5rem;
+
+    &:first-child {
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+    }
+
+    &:last-child {
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+    }
+
+    &:not(:first-child) {
+      border-top: none;
+    }
+
+    &:hover {
+      background: lighten(map-get($colors, first), 15);
+      color: map-get($colors, first-font);
+    }
+
+    &.active {
+      background: map-get($colors, first);
+    }
+
+  }
+}

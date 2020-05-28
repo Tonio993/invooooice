@@ -1,0 +1,8 @@
+<ol class="breadcrumb">
+  <li *ngFor="let breadcrumb of breadcrumbs; let last = last">
+    <span [routerLink]="breadcrumb.url" [class.has-route]="breadcrumb.url">
+      {{ breadcrumb.label }}
+    </span>
+    <fa-icon *ngIf="!last" [icon]="['fas', 'caret-right']"></fa-icon>
+  </li>
+</ol>

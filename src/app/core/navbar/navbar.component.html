@@ -1,0 +1,20 @@
+<ng-template #navbarTemplateRef let-context>
+  <ul>
+    <ng-container *ngFor="let item of context.itemList">
+      <li [routerLink]="item.path">
+        <a>{{item.label}}</a>
+        <fa-icon *ngIf="context.label && item.itemList" [icon]="['fas', 'caret-right']"></fa-icon>
+        <ng-template *ngIf="item.itemList"
+                     [ngTemplateOutlet]="navbarTemplateRef"
+                     [ngTemplateOutletContext]="{$implicit: item}">
+        </ng-template>
+    </ng-container>
+  </ul>
+</ng-template>
+
+<nav class="navbar">
+  <ng-template
+    [ngTemplateOutlet]="navbarTemplateRef"
+    [ngTemplateOutletContext]="{$implicit: navigationList}">
+  </ng-template>
+</nav>

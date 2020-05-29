@@ -8,8 +8,11 @@ import { Component, OnInit, Input } from '@angular/core';
 export class ListComponent implements OnInit {
   @Input() items : any[];
   @Input() selection : any | any[];
-  @Input() selectionMode : 'single' | 'multiple' = 'multiple';
+  @Input() selectionMode : 'single' | 'multiple' = 'single';
   @Input() label : string | ((any) => string);
+
+  private selectionIndex: number | number[];
+  private lastSelected: number = -1;
 
   constructor() { }
 
@@ -38,12 +41,15 @@ export class ListComponent implements OnInit {
   private select(item : any, event : MouseEvent) : void {
     switch(this.selectionMode) {
       case 'single': {
-        if (event.ctrlKey && this.selection == item) {
-            this.selection = null;
-        } else {
-          this.selection = item;
-        }
+        this.selection = event.ctrlKey && this.selection == item ? null : item;
         break;
+      }
+      case 'multiple': {
+        if (!event.ctrlKey) {
+          this.selection = [item];
+        } else {
+          this.selection = event.ctrlKey && this.selection == item ? null : item;
+        }
       }
     }
   }

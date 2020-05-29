@@ -46,10 +46,10 @@ export class ListComponent implements OnInit {
         break;
       }
       case 'multiple': {
-        if (!event.ctrlKey && !event.shiftKey) {
-          this.selection = [item];
-          this.lastIndex = index;
-        } else if (!event.shiftKey) {
+        if (!event.ctrlKey) {
+          this.selection = [];
+        }
+        if (!event.shiftKey) {
           const selectedIndex = this.selection.indexOf(item);
           this.lastIndex = index;
           if (selectedIndex != -1) {
@@ -57,17 +57,20 @@ export class ListComponent implements OnInit {
           } else {
             this.selection.push(item);
           }
-        } else if (!event.ctrlKey) {
+        } else {
           if (this.lastIndex == -1) {
             this.selection = [item];
             this.lastIndex = index;
           } else {
             const indexFrom = this.lastIndex < index ? this.lastIndex : index;
             const indexTo = this.lastIndex > index ? this.lastIndex : index;
-            this.selection = this.items.slice(indexFrom, indexTo + 1);
+            for (let rangeItem of this.items.slice(indexFrom, indexTo + 1)) {
+              console.log(this.selection.indexOf(rangeItem));
+              if (this.selection.indexOf(rangeItem) == -1) {
+                this.selection.push(rangeItem);
+              }
+            }
           }
-        } else {
-
         }
       }
     }

@@ -6,13 +6,17 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
-  @Input() items: any[];
-  @Input() selection: any | any[];
-  @Input() label: string | ((any) => string);
+  @Input() items : any[];
+  @Input() selection : any | any[];
+  @Input() selectionMode : 'single' | 'multiple' = 'multiple';
+  @Input() label : string | ((any) => string);
 
   constructor() { }
 
   ngOnInit() {
+    if (this.selectionMode === 'multiple' && this.selection == null) {
+      this.selection = [];
+    }
   }
 
   private getLabel(item : any) : string {
@@ -28,6 +32,19 @@ export class ListComponent implements OnInit {
       return this.selection.indexOf(item) !== -1;
     } else {
       return this.selection === item;
+    }
+  }
+
+  private select(item : any, event : MouseEvent) : void {
+    switch(this.selectionMode) {
+      case 'single': {
+        if (event.ctrlKey && this.selection == item) {
+            this.selection = null;
+        } else {
+          this.selection = item;
+        }
+        break;
+      }
     }
   }
 

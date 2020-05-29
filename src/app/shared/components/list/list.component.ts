@@ -48,7 +48,12 @@ export class ListComponent implements OnInit {
         if (!event.ctrlKey) {
           this.selection = [item];
         } else {
-          this.selection = event.ctrlKey && this.selection == item ? null : item;
+          const index = this.selection.indexOf(item);
+          if (index == -1) {
+            this.selection.push(item);
+          } else {
+            this.selection.splice(index, 1);
+          }
         }
       }
     }

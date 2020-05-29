@@ -1,5 +1,5 @@
 <div class="container mx-auto">
-  <app-list [items]="userList" label="username">
+  <app-list [items]="userList" selectionMode="multiple" label="username">
   </app-list>
   <div style="margin:0.5rem; text-align:right">
     <input type="button" value="Elimina" disabled (click)="onDelete()" />

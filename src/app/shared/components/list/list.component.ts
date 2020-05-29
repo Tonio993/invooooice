@@ -46,22 +46,29 @@ export class ListComponent implements OnInit {
         break;
       }
       case 'multiple': {
-        // this.lastIndex = index;
-        // if (!event.ctrlKey && !event.shiftKey) {
-        //   this.selection = [item];
-        // } else if (!event.shiftKey) {
-        //   const selectedIndex = this.selection.indexOf(item);
-        //   console.log(this.selection.indexOf(item));
-        //   if (selectedIndex != -1) {
-        //     this.selection.splice(selectedIndex, 1);
-        //   } else {
-        //     this.selection.push(item);
-        //   }
-        // } else if (!event.ctrlKey) {
-          
-        // } else {
+        if (!event.ctrlKey && !event.shiftKey) {
+          this.selection = [item];
+          this.lastIndex = index;
+        } else if (!event.shiftKey) {
+          const selectedIndex = this.selection.indexOf(item);
+          this.lastIndex = index;
+          if (selectedIndex != -1) {
+            this.selection.splice(selectedIndex, 1);
+          } else {
+            this.selection.push(item);
+          }
+        } else if (!event.ctrlKey) {
+          if (this.lastIndex == -1) {
+            this.selection = [item];
+            this.lastIndex = index;
+          } else {
+            const indexFrom = this.lastIndex < index ? this.lastIndex : index;
+            const indexTo = this.lastIndex > index ? this.lastIndex : index;
+            this.selection = this.items.slice(indexFrom, indexTo + 1);
+          }
+        } else {
 
-        // }
+        }
       }
     }
   }

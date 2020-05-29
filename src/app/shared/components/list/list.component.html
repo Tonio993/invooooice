@@ -1,6 +1,6 @@
 <div style="margin:0.5rem">
   <ul class="list">
-    <li *ngFor="let item of items" [class.active]="isActive(item)" (click)="select(item, $event)">
+    <li *ngFor="let item of items; let index = index" [class.active]="isActive(item)" (click)="select(index, $event)">
       <p>{{getLabel(item)}}</p>
     </li>
   </ul>

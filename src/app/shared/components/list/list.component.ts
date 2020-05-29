@@ -12,7 +12,7 @@ export class ListComponent implements OnInit {
   @Input() label : string | ((any) => string);
 
   private selectionIndex: number | number[];
-  private lastSelected: number = -1;
+  private lastIndex: number = -1;
 
   constructor() { }
 
@@ -38,23 +38,30 @@ export class ListComponent implements OnInit {
     }
   }
 
-  private select(item : any, event : MouseEvent) : void {
+  private select(index : number, event : MouseEvent) : void {
+    const item = this.items[index];
     switch(this.selectionMode) {
       case 'single': {
         this.selection = event.ctrlKey && this.selection == item ? null : item;
         break;
       }
       case 'multiple': {
-        if (!event.ctrlKey) {
-          this.selection = [item];
-        } else {
-          const index = this.selection.indexOf(item);
-          if (index == -1) {
-            this.selection.push(item);
-          } else {
-            this.selection.splice(index, 1);
-          }
-        }
+        // this.lastIndex = index;
+        // if (!event.ctrlKey && !event.shiftKey) {
+        //   this.selection = [item];
+        // } else if (!event.shiftKey) {
+        //   const selectedIndex = this.selection.indexOf(item);
+        //   console.log(this.selection.indexOf(item));
+        //   if (selectedIndex != -1) {
+        //     this.selection.splice(selectedIndex, 1);
+        //   } else {
+        //     this.selection.push(item);
+        //   }
+        // } else if (!event.ctrlKey) {
+          
+        // } else {
+
+        // }
       }
     }
   }
